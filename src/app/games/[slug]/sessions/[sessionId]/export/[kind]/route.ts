@@ -142,10 +142,7 @@ function buildCsv(kind: ExportKind, input: CsvInput): string {
           "Round",
           "Player",
           "Played by robot",
-          // Each row is one role, so the column names the direction rather than
-          // a specific stage: for the Retailer this is customer demand, for the
-          // others it is the order placed by the stage they supply.
-          "Demand from downstream",
+          "Ordered from them",
           "Arrived",
           "Shipped",
           "Order placed",
