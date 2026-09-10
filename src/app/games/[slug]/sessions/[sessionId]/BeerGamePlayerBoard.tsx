@@ -5,7 +5,12 @@
 
 import { LineChart } from "@/components/LineChart";
 import { PollingRefresher } from "@/components/PollingRefresher";
-import { ROLE_COLORS, ROLE_LABELS, type BeerGameRole } from "@/lib/beerGame";
+import {
+  demandSourceLabel,
+  ROLE_COLORS,
+  ROLE_LABELS,
+  type BeerGameRole,
+} from "@/lib/beerGame";
 import { ORDER_CHART_Y_MAX } from "@/lib/beerGameAnalytics";
 import { OrderForm } from "./OrderForm";
 
@@ -81,9 +86,9 @@ export function BeerGamePlayerBoard({
           emphasis={backlog > 0}
         />
         <Stat
-          label="Ordered from you"
+          label={`Demand from ${demandSourceLabel(role)}`}
           value={lastIncomingOrder}
-          hint={role === "RETAILER" ? "Customers, last round" : "Last round"}
+          hint="Last round"
         />
         <Stat
           label="Arrived"

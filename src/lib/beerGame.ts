@@ -56,6 +56,16 @@ const UPSTREAM: Record<BeerGameRole, BeerGameRole | undefined> = {
   FACTORY: undefined,
 };
 
+/**
+ * Who a role's demand arrives from, for labelling it on screen: real customers
+ * for the Retailer, otherwise the stage it supplies. Lives here so the board
+ * and any future view name the source the same way.
+ */
+export function demandSourceLabel(role: BeerGameRole): string {
+  const downstream = DOWNSTREAM[role];
+  return downstream ? ROLE_LABELS[downstream] : "customers";
+}
+
 export type RoundStateByRole = Record<
   BeerGameRole,
   {

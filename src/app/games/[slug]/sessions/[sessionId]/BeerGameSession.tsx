@@ -137,7 +137,30 @@ export async function BeerGameSession({
 
       {session.status === "ACTIVE" &&
         (canManage ? (
-          <HostView slug={slug} sessionId={sessionId} session={data} />
+          <>
+            <HostView slug={slug} sessionId={sessionId} session={data} />
+            {/*
+              A host may also hold a seat: the lobby offers them a Join button
+              and startSession deals every participant into a chain. The console
+              has nowhere to enter an order, so their own board goes *below* it
+              rather than replacing it — otherwise the round sits waiting on an
+              order they have no way to place.
+            */}
+            {viewer && (
+              <section className="mt-10 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+                <p className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-500">
+                  Your seat
+                </p>
+                <PlayerView
+                  slug={slug}
+                  sessionId={sessionId}
+                  session={data}
+                  config={config}
+                  participantId={viewer.id}
+                />
+              </section>
+            )}
+          </>
         ) : viewer ? (
           <PlayerView
             slug={slug}
